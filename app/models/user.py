@@ -15,11 +15,6 @@ class User(BaseModel):
     is_admin = Column(Boolean, default=False, nullable=False)
     is_active = Column(Boolean, default=True, nullable=False)
 
-
-    ''' Создаем связь между таблицами Order, Cart, Review, ViewHistory, Favorite '''
-    orders = relationship("Order", back_populates="user")
-    cart_items = relationship("Cart", back_populates="user")
-
     ''' Пример отображения объекта '''
     def __repr__(self):
         return f"<User(username='{self.username}', email='{self.email}')>"

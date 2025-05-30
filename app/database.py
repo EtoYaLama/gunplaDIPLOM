@@ -1,6 +1,9 @@
+# app/database.py
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, Session
+from contextlib import contextmanager
 import logging
 
 from app.config import settings
@@ -28,8 +31,25 @@ def get_db():
     db = SessionLocal()
     try:
         yield db
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+@contextmanager
+def get_db_context():
+    """
+    Контекстный менеджер для работы с базой данных.
+    Использовать когда нужно явно управлять транзакциями.
+    """
+    db = SessionLocal()
+    try:
+        yield db
+        db.commit()
     except Exception as e:
-        logger.error(f"Database error: {str(e)}")
+        logger.error(f"Ошибка в контексте базы данных: {str(e)}")
         db.rollback()
         raise
     finally:
