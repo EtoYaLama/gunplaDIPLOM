@@ -1,0 +1,38 @@
+select pg_catalog.version()
+[raw sql] {}
+select current_schema()
+[raw sql] {}
+show standard_conforming_strings
+[raw sql] {}
+BEGIN (implicit)
+SELECT users.email, users.username, users.password_hash, users.full_name, users.phone, users.address, users.is_admin, users.is_active, users.id, users.created_at, users.updated_at 
+FROM users 
+WHERE users.email = %(email_1)s
+[generated in 0.00048s] {'email_1': 'qwerty@gmail.com'}
+Неверные учетные данные для qwerty@gmail.com
+Ошибка при входе пользователя qwerty@gmail.com: 401: Неверный email или пароль
+ROLLBACK
+BEGIN (implicit)
+SELECT users.email, users.username, users.password_hash, users.full_name, users.phone, users.address, users.is_admin, users.is_active, users.id, users.created_at, users.updated_at 
+FROM users 
+WHERE users.email = %(email_1)s
+[cached since 171.5s ago] {'email_1': 'qwerty@gmail.com'}
+Неверные учетные данные для qwerty@gmail.com
+Ошибка при входе пользователя qwerty@gmail.com: 401: Неверный email или пароль
+ROLLBACK
+Ошибка при входе пользователя qwerty@gmail.com: name 'and_' is not defined
+select pg_catalog.version()
+[raw sql] {}
+select current_schema()
+[raw sql] {}
+show standard_conforming_strings
+[raw sql] {}
+BEGIN (implicit)
+SELECT users.email AS users_email, users.username AS users_username, users.password_hash AS users_password_hash, users.full_name AS users_full_name, users.phone AS users_phone, users.address AS users_address, users.is_admin AS users_is_admin, users.is_active AS users_is_active, users.id AS users_id, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+[generated in 0.00047s] {'email_1': 'qwerty@gmail.com', 'param_1': 1}
+Неверные учетные данные для qwerty@gmail.com
+Ошибка при входе пользователя qwerty@gmail.com: 401: Неверный email или пароль
+ROLLBACK
