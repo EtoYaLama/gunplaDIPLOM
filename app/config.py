@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings
 from pydantic import ValidationError
 from authx import AuthXConfig
+from typing import List
 
 from dotenv import find_dotenv
 
@@ -17,6 +18,9 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     config.JWT_TOKEN_LOCATION = ["cookies"]
     config.JWT_ACCESS_COOKIE_NAME = "gunpla_access_token"
+
+    # Работа с фото
+    ALLOWED_EXTENSIONS: List[str] = ["jpg", "jpeg", "png", "webp"]
 
 
     # Автоматическое подставлением данных с .env файла
