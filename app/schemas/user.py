@@ -81,6 +81,11 @@ class UserProfileSchemas(UserResponseSchemas):
     pass
 
 
+class UserUpdateSchemas(BaseModel):
+    full_name: Optional[str] = None
+    phone: Optional[str] = None
+    address: Optional[str] = None
+
 
 ''' Схема для токена '''
 class TokenSchemas(BaseModel):
